@@ -1,13 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { diseno } from './estilo/diseno';
+import { FormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'app-gestorgastos',
+  selector: 'app-gestor',
+  standalone: true,
+  imports:[FormsModule],
   templateUrl: './gestor.component.html',
   styleUrls: ['./gestor.component.scss'], // Cambiado de styleUrl a styleUrls
 })
 export class GestorComponent implements OnInit {
   gestorList: diseno[] = [];
+  
   diseno: any = {
     distancia: 0,
     kilometrosgalon: 0,
