@@ -1,0 +1,29 @@
+<form #formulario="ngForm" (submit)="onSubmit(formulario.value)">
+    <div>
+    <label>Distancia en kilómetros del destino</label>
+        <input type="number" id="distancia" name="distancia" ngModel="diseno.distancia" required>
+    </div>
+    <div> <label>Cantidad de kilómetros por galón de combustible</label>
+        <input type="number" id="kilometrosgalon" name="kilometrosgalon" ngModel="diseno.kilometrosgalon" required>
+   </div> 
+   <div> <label>Costo del galón de combustible</label>
+    <input type="number" id="costogalon" name="costogalon" ngModel="diseno.costogalon" required>
+</div>
+<div> <label>Costo de cada peaje</label>
+    <input type="number" id="costopeaje" name="costopeaje" ngModel="diseno.costopeaje" required>
+</div>
+   <input type="submit" value="Enviar">
+</form> 
+
+<div>
+   <ul>
+       @for(diseno of gestorList; track $index){
+       <li (click)="onRemove($index)">
+           {{diseno.distancia}} - {{diseno.kilometrosgalon}} -{{diseno.costogalon}}
+           @if (diseno.costopeaje){
+               Prioridad: {{diseno.costopeaje}}
+           }
+       </li>
+    }
+   </ul>
+</div>
