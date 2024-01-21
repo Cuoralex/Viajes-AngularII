@@ -3,4 +3,6 @@ export interface diseno{
     kilometrosgalon: number;
     costogalon: number;
     costopeaje: number;
+    costoAproximado: number;  
+    duracionAproximada: number;  
     }

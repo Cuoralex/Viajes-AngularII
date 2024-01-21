@@ -1,29 +1,48 @@
 <form #formulario="ngForm" (submit)="onSubmit(formulario.value)">
-    <div>
-    <label>Distancia en kilómetros del destino</label>
-        <input type="number" id="distancia" name="distancia" ngModel="diseno.distancia" required>
-    </div>
-    <div> <label>Cantidad de kilómetros por galón de combustible</label>
-        <input type="number" id="kilometrosgalon" name="kilometrosgalon" ngModel="diseno.kilometrosgalon" required>
-   </div> 
-   <div> <label>Costo del galón de combustible</label>
-    <input type="number" id="costogalon" name="costogalon" ngModel="diseno.costogalon" required>
+  <div>
+  <label>Distancia en kilómetros del destino</label>
+  <input type="number" id="distancia" name="distancia" [(ngModel)]="diseno.distancia" required>
+  </div>
+  <div> <label>Cantidad de kilómetros por galón de combustible</label>
+    <input type="number" id="kilometrosgalon" name="kilometrosgalon" [(ngModel)]="diseno.kilometrosgalon" required>
+ </div> 
+ <div> <label>Costo del galón de combustible</label>
+  <input type="number" id="costosgalon" name="costogalon" [(ngModel)]="diseno.costogalon" required>
 </div>
 <div> <label>Costo de cada peaje</label>
-    <input type="number" id="costopeaje" name="costopeaje" ngModel="diseno.costopeaje" required>
+  <input type="number" id="costopeaje" name="costopeaje" [(ngModel)]="diseno.costopeaje" required>
 </div>
-   <input type="submit" value="Enviar">
+ <input type="submit" value="Enviar">
 </form> 
 
 <div>
-   <ul>
-       @for(diseno of gestorList; track $index){
-       <li (click)="onRemove($index)">
-           {{diseno.distancia}} - {{diseno.kilometrosgalon}} -{{diseno.costogalon}}
-           @if (diseno.costopeaje){
-               Prioridad: {{diseno.costopeaje}}
-           }
-       </li>
-    }
-   </ul>
+ <ul>
+     @for(diseno of gestorList; track $index){
+     <li (click)="onRemove($index)">
+         {{diseno.distancia}} - {{diseno.kilometrosgalon}} -{{diseno.costogalon}}
+         @if (diseno.costopeaje){
+             Prioridad: {{diseno.costopeaje}}
+         }
+     </li>
+  }
+ </ul>
+</div>
+
+<div>
+  <ul>
+    <li *ngFor="let diseno of gestorList; let i = index" (click)="onRemove(i)">
+      {{diseno.distancia}} km - Costo Aprox.: {{diseno.costoAproximado }} - Duración Aprox.: {{diseno.duracionAproximada}} horas
+      <span *ngIf="diseno.duracionAproximada > 12" style="color: red;">¡Advertencia! Descanse durante el viaje.</span>
+      <span *ngIf="diseno.costopeaje">Prioridad: {{diseno.costopeaje}}</span>
+    </li>
+  </ul>
+</div>
+
+<div>
+  <ul>
+    <li *ngIf="let disenoItem of gestorList; let i = index" (click)="onRemove(i)">
+      {{disenoItem.distancia}} km - Costo Aprox.: {{disenoItem.costoAproximado }} - Duración Aprox.: {{disenoItem.duracionAproximada }} horas
+      <span *ngIf="disenoItem.costopeaje">Prioridad: {{disenoItem.costopeaje}}</span>
+    </li>
+  </ul>
 </div>
